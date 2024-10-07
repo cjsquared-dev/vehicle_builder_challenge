@@ -28,7 +28,7 @@ class Truck extends Vehicle implements AbleToTow {
     year: number,
     weight: number,
     topSpeed: number,
-    wheels: Wheel[],
+    wheels: Wheel[] =[],
     towingCapacity: number,
   ) {
 // TODO: The constructor should call the constructor of the parent class, Vehicle
