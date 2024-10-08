@@ -187,7 +187,7 @@ class Cli {
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
           [],
-          parseInt(answers.towingCapacity)
+          parseInt(answers.towingCapacity),
         );
         this.vehicles.push(truck);
         this.selectedVehicleVin = truck.vin;
@@ -242,6 +242,7 @@ class Cli {
         {
           type: 'input',
           name: 'rearWheelDiameter',
+          message: 'Enter Rear Wheel Diameter',
         },
         {
           type: 'input',
@@ -320,14 +321,15 @@ class Cli {
             'Turn right',
             'Turn left',
             'Reverse',
-            'Select or create another vehicle',
             'Tow a Vehicle',
             'Perform a Wheelie',
+            'Select or create another vehicle',
             'Exit',
           ],
         },
       ])
       .then((answers) => {
+        const selectedVehicle = this.vehicles.find(vehicle => vehicle.vin === this.selectedVehicleVin);
         // perform the selected action
         if (answers.action === 'Print details') {
           // find the selected vehicle and print its details
@@ -385,24 +387,30 @@ class Cli {
               this.vehicles[i].reverse();
             }
           }
-        }
-        // Perform the tow action if the selected vehicle is a truck
-        else if (answers.action === 'Tow Vehicle' && this.selectedVehicleVin) {
-          const selectedVehicle = this.vehicles.find(vehicle => vehicle.vin === this.selectedVehicleVin);
-          if (selectedVehicle instanceof Truck) {
-            this.findVehicleToTow(selectedVehicle);
-            return;
-          }
-        }
 
-        // Perform the wheelie action if the selected vehicle is a motorbike
-        if (answers.action === 'Perform a Wheelie' && this.selectedVehicleVin) {
-          const selectedVehicle = this.vehicles.find(vehicle => vehicle.vin === this.selectedVehicleVin);
-          if (selectedVehicle instanceof Motorbike) {
-            selectedVehicle.wheelie();
+        } else if (answers.action === 'Tow a Vehicle') {
+          // find the selected vehicle and tow another vehicle
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (this.vehicles[i].vin === this.selectedVehicleVin) {
+              if (this.vehicles[i] instanceof Truck) {
+                this.findVehicleToTow(this.vehicles[i] as Truck);
+              } else {
+                console.log("Only trucks can tow vehicles.");
+              }
+            }
           }
-        }
-        else if (answers.action === 'Select or create another vehicle') {
+        } else if (answers.action === 'Perform a Wheelie') {
+          // find the selected vehicle and perform a wheelie
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (this.vehicles[i].vin === this.selectedVehicleVin) {
+              if (this.vehicles[i] instanceof Motorbike) {
+                (this.vehicles[i] as Motorbike).wheelie();
+              } else {
+                console.log("Only motorbikes can perform wheelies.");
+              }
+            }
+          }
+        } else if (answers.action === 'Select or create another vehicle') {
           // start the cli to return to the initial prompt if the user wants to select or create another vehicle
           this.startCli();
           return;
