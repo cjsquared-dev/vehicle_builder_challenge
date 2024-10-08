@@ -383,7 +383,7 @@ class Cli {
               this.vehicles[i].reverse();
             }
           }
-        } else if (answers.action === 'Tow a vehicle') {
+        }  else if (answers.action === 'Tow a vehicle') {
           // find the selected vehicle and tow another vehicle
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Truck) {
@@ -391,8 +391,9 @@ class Cli {
               return;
             }
           }
+            // If no matching vehicle is found or the selected vehicle is not a truck
+            console.log("The selected vehicle is not a truck");
          } else if (answers.action === 'Do a wheelie') {
-          // find the selected vehicle and perform a wheelie
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin) {
               if (this.vehicles[i] instanceof Motorbike) {
