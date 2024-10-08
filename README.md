@@ -19,9 +19,8 @@ This application relies on installing npm packages on your local machine.
 
 Simply invoke npm start and the CLI will prompt questions to help build the vehicle of your choice!
 
-Please see Video walkthrough:  https://drive.google.com/file/d/1dPYUphC3glwQkkdNWL_F1XI69XFlEr3f/view
+Please see Video walkthrough:  https://drive.google.com/file/d/15ahaNY26htWoVZBI878QGE0MZU10l-gk/view
 
-Sample Output: https://github.com/cjsquared-dev/nodejs_challenge/blob/258da125e7f0ab2ab97bc25dba9614706932a440/newREADME.md
 
 ## Credits
 
