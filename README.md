@@ -4,7 +4,7 @@
 
 This CLE Vehicle Builder allows a user to build a vehicle and have it perform basic functions
 
-## Table of Contents (Optional)
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
